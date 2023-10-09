@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 commentNumber = 2;
 function fillBoxes() {
-    commentNumber = +1;
+    commentNumber++;
     const commentID = commentNumber;
     const articleID = document.getElementById('articleID').value;
     const commenterNickname = document.getElementById('commenterNickname').value;
@@ -31,15 +31,14 @@ function fillBoxes() {
         CommentDate: commentDate,
         CommentText: commentText
     };
-    console.log("22222");
     document.getElementById('filledInfo').innerHTML = JSON.stringify(commentInfo, null, 2);
-    
-    fetch('/api/createComment', {
+
+    fetch('/createComment', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(commentData),
+        body: JSON.stringify(commentInfo),
     })
     .then(response => response.json())
     .then(newComment => {
@@ -50,10 +49,10 @@ function fillBoxes() {
         alert('Failed to insert comment. Please try again.');
     });
 }
-/*
+
 function searchFighter() {
     const searchTerm = document.getElementById('nickname').value;
-    fetch(`/api/searchFighter?nickname=${encodeURIComponent(searchTerm)}`)
+    fetch(`/searchFighter?nickname=${encodeURIComponent(searchTerm)}`)
         .then(response => response.json())
         .then(data => {
             displaySearchResults(data);
@@ -85,4 +84,33 @@ function displaySearchResults(results) {
 
     searchResultsContainer.appendChild(resultList);
 }
-*/
+
+
+document.getElementById('updateForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const eventID = document.getElementById('eventID').value;
+    const changes = JSON.parse(document.getElementById('changes').value);
+    
+    try {
+      const response = await fetch(`/updateEvent/${eventID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(changes),
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        document.getElementById('result').textContent = 'Event updated successfully.';
+      } else {
+        document.getElementById('result').textContent = 'Failed to update event.';
+      }
+    } catch (error) {
+      console.error(error);
+      document.getElementById('result').textContent = 'Error occurred while updating event.';
+    }
+  });
+  

@@ -41,6 +41,19 @@
     <h2>Filled Comment Information</h2>
     <div id="filledInfo"></div>
 
+    <h1>Update Event</h1>
+    <form id="updateForm">
+        <label for="eventID">Event ID:</label>
+        <input type="number" id="eventID" name="eventID" required>
+        <br>
+        <label for="changes">Changes (JSON):</label>
+        <textarea id="changes" name="changes" rows="4" required></textarea>
+        <br>
+        <button type="submit">Update Event</button>
+    </form>
+    <div id="result"></div>
+
+    
     <script src="script.js"></script>
 </body>
 </html>
