@@ -2,7 +2,9 @@
     "name": "my-app",
     "version": "1.0",
     "scripts": {
-      "start": "node app.js"
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "knex": "^3.0.1"
     }
-  }
-  
+}
