@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 8080;
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -14,8 +15,8 @@ app.all('*', (req, res) => {
     res.json(jsonResponse);
 });
 
-//start the server
-const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Server is active. port : ${port}`);
 });
+
+module.exports = app;

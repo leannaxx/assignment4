@@ -5,6 +5,7 @@
         "start": "node app.js"
     },
     "dependencies": {
-        "knex": "^3.0.1"
+        "knex": "^3.0.1",
+        "pg": "^8.11.3"
     }
 }
