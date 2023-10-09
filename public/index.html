@@ -19,6 +19,28 @@
     <br>
     <button id="surprise">Surprise button</button>
     <div id="response"></div>
+   
+    <h1>Comment Information</h1>
+    <form id="commentForm">
+
+        <label for="articleID">Article title:</label>
+        <input type="text" id="articleID" name="articleID"><br>
+
+        <label for="commenterNickname">Commenter Nickname:</label>
+        <input type="text" id="commenterNickname" name="commenterNickname"><br>
+
+        <label for="commentDate">Comment Date:</label>
+        <input type="text" id="commentDate" name="commentDate"><br>
+
+        <label for="commentText">write your comment here :) :</label>
+        <textarea id="commentText" name="commentText"></textarea><br>
+
+        <button type="button" onclick="fillBoxes()">Fill Boxes</button>
+    </form>
+
+    <h2>Filled Comment Information</h2>
+    <div id="filledInfo"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
