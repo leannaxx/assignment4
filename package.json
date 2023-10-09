@@ -1,0 +1,8 @@
+{
+    "name": "my-app",
+    "version": "1.0",
+    "scripts": {
+      "start": "node app.js"
+    }
+  }
+  
