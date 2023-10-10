@@ -11,14 +11,9 @@
     here at UCI us efrei students are learning a lot. <br>
     For example today i am coding a small website and server in express. 
     <br>
-    <br>
-    here is my button. It tells you a random number (it changes everytime you click it!!)
-    <br>
     here is my link to another website <a href="https://github.com"> click here</a><br>
     here is my link to a seconde website <a href="https://youtube.com"> click here</a><br>
     <br>
-    <button id="surprise">Surprise button</button>
-    <div id="response"></div>
    
     <h1>Comment Information</h1>
     <form id="commentForm">
@@ -41,6 +36,14 @@
     <h2>Filled Comment Information</h2>
     <div id="filledInfo"></div>
 
+    <h1>Fighter Search</h1>
+    <label for="nickname">Enter Fighter Nickname:</label>
+    <input type="text" id="nickname" placeholder="Enter nickname">
+    <button onclick="searchFighter()">Search</button>
+
+    <div id="searchResults">
+    </div>
+
     <h1>Update Event</h1>
     <form id="updateForm">
         <label for="eventID">Event ID:</label>
@@ -53,7 +56,15 @@
     </form>
     <div id="result"></div>
 
+    <h1>Delete Comment</h1>
+    <form id="deleteCommentForm">
+        <label for="commentId">Comment ID:</label>
+        <input type="number" id="commentId" name="commentId" required>
+        <button type="submit">Delete Comment</button>
+    </form>
     
+    <div id="message"></div>
+
     <script src="script.js"></script>
 </body>
 </html>

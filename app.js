@@ -1,24 +1,9 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
+const knex = require('knex');
 
 app.use(express.json());
-
-app.put('/updateEvent/:id', async (req, res) => {
-    const { id } = req.params;
-    const changes = req.body;
-  
-    try {
-      await knex('Events')
-        .where({ EventID: id })
-        .update(changes);
-  
-      res.json({ success: true });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, error: 'Failed to update event' });
-    }
-  });
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -30,7 +15,7 @@ app.listen(port, () => {
 module.exports = app;
 
 // Path: knex.js
-
+// creation
 app.post('/createComment', (req, res) => {
     const { CommentID,ArticleID, CommenterNickname, CommentDate, CommentText } = req.body;
     knex('Comments')
@@ -52,6 +37,7 @@ app.post('/createComment', (req, res) => {
         });
 });
 
+//retrieval  
 app.get('/searchFighters', (req, res) => {
     const searchTerm = req.query.firstName;
     knex('Fighters')
@@ -65,3 +51,20 @@ app.get('/searchFighters', (req, res) => {
             res.status(500).json({ error: 'Failed to perform search' });
         });
 });
+
+//update
+app.put('/updateEvent/:id', async (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
+  
+    try {
+      await knex('Events')
+        .where({ EventID: id })
+        .update(changes);
+  
+      res.json({ success: true });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: 'Failed to update event' });
+    }
+  });

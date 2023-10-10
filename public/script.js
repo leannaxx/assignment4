@@ -91,7 +91,7 @@ document.getElementById('updateForm').addEventListener('submit', async (e) => {
     
     const eventID = document.getElementById('eventID').value;
     const changes = JSON.parse(document.getElementById('changes').value);
-    
+    alert("answer submitted yay!!");
     try {
       const response = await fetch(`/updateEvent/${eventID}`, {
         method: 'PUT',
@@ -112,5 +112,34 @@ document.getElementById('updateForm').addEventListener('submit', async (e) => {
       console.error(error);
       document.getElementById('result').textContent = 'Error occurred while updating event.';
     }
-  });
-  
+  });  
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const deleteCommentForm = document.getElementById('deleteCommentForm');
+    const messageContainer = document.getElementById('message');
+
+    deleteCommentForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const commentId = document.getElementById('commentId').value;
+
+        try {
+            const response = await fetch(`/deleteComment/${commentId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                messageContainer.textContent = 'Comment deleted successfully.';
+                messageContainer.style.color = 'green';
+            } else {
+                const errorData = await response.json();
+                messageContainer.textContent = `Error: ${errorData.message}`;
+                messageContainer.style.color = 'red';
+            }
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+            messageContainer.textContent = 'An error occurred while deleting the comment.';
+            messageContainer.style.color = 'red';
+        }
+    });
+});
