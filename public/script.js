@@ -1,20 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById('surprise');
-    const response1 = document.getElementById('response');
-
-    button.addEventListener('click', () => {
-        const randomnb = Math.floor(Math.random() * 100);
-        fetch(`${randomnb}`)
-            .then((response) => response.json())
-            .then((data) => {
-                response1.innerHTML = ` ${data.message}`;
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    });
-});
-
 //adding
 commentNumber = 2;
 function fillBoxes() {
@@ -93,7 +76,18 @@ document.getElementById('updateForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const eventID = document.getElementById('eventID').value;
-    const changes = JSON.parse(document.getElementById('changes').value);
+    const changesTextarea = document.getElementById('changes');
+    const userInput = changesTextarea.value;
+    let changes
+    try {
+        changes = JSON.parse(userInput);
+        alert("json parsed");
+    } catch (error) {
+    console.error(error);
+    alert("Invalid JSON input. Please enter valid JSON.");
+    return;
+    }
+
     alert("answer submitted yay!!");
     try {
       const response = await fetch(`/updateEvent/${eventID}`, {
@@ -108,14 +102,17 @@ document.getElementById('updateForm').addEventListener('submit', async (e) => {
       
       if (data.success) {
         document.getElementById('result').textContent = 'Event updated successfully.';
+        alert("sucess");
       } else {
         document.getElementById('result').textContent = 'Failed to update event.';
+        alert("failed pls retry");
       }
     } catch (error) {
       console.error(error);
       document.getElementById('result').textContent = 'Error occurred while updating event.';
+        alert("error occured");
     }
-  });  
+  }); 
 
 //delete
 const deleteCommentForm = document.getElementById('deleteCommentForm');
