@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//adding
 commentNumber = 2;
 function fillBoxes() {
     commentNumber++;
@@ -50,6 +51,8 @@ function fillBoxes() {
     });
 }
 
+
+//retrieval
 function searchFighter() {
     const searchTerm = document.getElementById('nickname').value;
     fetch(`/searchFighter?nickname=${encodeURIComponent(searchTerm)}`)
@@ -85,7 +88,7 @@ function displaySearchResults(results) {
     searchResultsContainer.appendChild(resultList);
 }
 
-
+//update
 document.getElementById('updateForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -114,32 +117,31 @@ document.getElementById('updateForm').addEventListener('submit', async (e) => {
     }
   });  
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const deleteCommentForm = document.getElementById('deleteCommentForm');
-    const messageContainer = document.getElementById('message');
+//delete
+const deleteCommentForm = document.getElementById('deleteCommentForm');
+const messageContainer = document.getElementById('message');
 
-    deleteCommentForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+deleteCommentForm.addEventListener('submitdelete', async (e) => {
+    e.preventDefault();
 
-        const commentId = document.getElementById('commentId').value;
+    const commentId = document.getElementById('commentId').value;
 
-        try {
-            const response = await fetch(`/deleteComment/${commentId}`, {
-                method: 'DELETE',
-            });
+    try {
+        const response = await fetch(`/deleteComment/${commentId}`, {
+            method: 'DELETE',
+        });
 
-            if (response.ok) {
-                messageContainer.textContent = 'Comment deleted successfully.';
-                messageContainer.style.color = 'green';
-            } else {
-                const errorData = await response.json();
-                messageContainer.textContent = `Error: ${errorData.message}`;
-                messageContainer.style.color = 'red';
-            }
-        } catch (error) {
-            console.error('Error deleting comment:', error);
-            messageContainer.textContent = 'An error occurred while deleting the comment.';
+        if (response.ok) {
+            messageContainer.textContent = 'Comment deleted successfully.';
+            messageContainer.style.color = 'green';
+        } else {
+            const errorData = await response.json();
+            messageContainer.textContent = `Error: ${errorData.message}`;
             messageContainer.style.color = 'red';
         }
-    });
+    } catch (error) {
+        console.error('Error deleting comment:', error);
+        messageContainer.textContent = 'An error occurred while deleting the comment.';
+        messageContainer.style.color = 'red';
+    }
 });
